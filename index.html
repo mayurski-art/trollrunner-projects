@@ -30,7 +30,7 @@
         linear-gradient(180deg, #080811 0%, #06060d 100%);
     }
 
-    .noise::before {
+    .scanlines::before {
       content: "";
       pointer-events: none;
       position: fixed;
@@ -44,13 +44,13 @@
       );
     }
 
-    .container {
+    .wrap {
       max-width: 1080px;
       margin: 0 auto;
       padding: 24px 16px 60px;
     }
 
-    .topbar {
+    .top {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -68,13 +68,13 @@
       text-transform: uppercase;
     }
 
-    .nav {
+    .pills {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
     }
 
-    .chip {
+    .pill {
       text-decoration: none;
       color: var(--text);
       border: 1px solid var(--line);
@@ -84,7 +84,17 @@
       font-size: 12px;
     }
 
-    .chip:hover { background: rgba(175,121,255,0.16); }
+    .pill:hover { background: rgba(175,121,255,0.16); }
+
+    .pill-nutrition {
+      border-color: rgba(126, 255, 142, 0.55);
+      background: rgba(126, 255, 142, 0.16);
+      color: #dfffe5;
+    }
+
+    .pill-nutrition:hover {
+      background: rgba(126, 255, 142, 0.28);
+    }
 
     .hero {
       margin-top: 18px;
@@ -237,7 +247,7 @@
 <body class="scanlines">
   <div class="wrap">
     <div class="top">
-      <strong class="brand">🗂️ TROLLRUNNER.PROJECTS</strong>
+      <div class="brand">🗂️ TROLLRUNNER.PROJECTS</div>
       <nav class="pills" aria-label="Section links">
         <a class="pill" href="https://blog.trollrunner.net">Blogs</a>
         <a class="pill" href="https://finance.trollrunner.net">Finances</a>
@@ -313,6 +323,6 @@ ETA split:
     <footer>
       Trollrunner Projects · Art Routes for the internet generation.
     </footer>
-  </main>
+  </div>
 </body>
 </html>
