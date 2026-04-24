@@ -62,9 +62,9 @@
     .wrap {
       position: relative;
       z-index: 1;
-      width: min(1200px, calc(100% - 32px));
+      width: min(1080px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 26px 0 54px;
+      padding: 20px 0 42px;
     }
 
     .top {
@@ -72,7 +72,7 @@
       grid-template-columns: 1fr auto;
       gap: 16px;
       align-items: center;
-      padding: 18px 20px;
+      padding: 15px 18px;
       border-radius: 22px;
       border: 1px solid var(--line);
       background: rgba(7, 19, 28, 0.62);
@@ -117,7 +117,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 18px;
-      margin-top: 18px;
+      margin-top: 14px;
       align-items: stretch;
     }
 
@@ -132,7 +132,7 @@
     }
 
     .headline {
-      padding: 28px;
+      padding: 24px;
       position: relative;
       overflow: hidden;
       isolation: isolate;
@@ -174,22 +174,22 @@
 
     h1 {
       margin: 18px 0 0;
-      font-size: clamp(3.2rem, 9vw, 6.6rem);
+      font-size: clamp(2.8rem, 8vw, 5.4rem);
       line-height: 0.92;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
     .subtitle {
-      margin: 18px 0 0;
-      max-width: 52ch;
+      margin: 14px 0 0;
+      max-width: 50ch;
       color: var(--muted);
-      line-height: 1.8;
-      font-size: 1rem;
+      line-height: 1.7;
+      font-size: 0.96rem;
     }
 
     .stats-shell {
-      padding: 18px;
+      padding: 16px;
       display: grid;
       gap: 12px;
       align-content: start;
@@ -198,7 +198,7 @@
     .sticker-stage {
       position: relative;
       min-height: 100%;
-      padding: 18px;
+      padding: 16px;
       overflow: hidden;
     }
 
@@ -225,8 +225,8 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 14px;
-      margin-top: 16px;
-      min-height: 420px;
+      margin-top: 12px;
+      min-height: 360px;
     }
 
     .sticker-card {
@@ -279,7 +279,7 @@
     }
 
     .sticker-card.hero-art {
-      min-height: 420px;
+      min-height: 360px;
     }
 
     .orbital-ring {
@@ -320,7 +320,7 @@
     }
 
     .stat {
-      padding: 16px;
+      padding: 14px;
       border-radius: 20px;
       background: rgba(7, 19, 26, 0.92);
       border: 1px solid rgba(116,255,205,0.12);
@@ -334,8 +334,8 @@
     }
 
     .value {
-      margin-top: 10px;
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      margin-top: 8px;
+      font-size: clamp(1.2rem, 2.5vw, 1.85rem);
       color: var(--accent);
       font-weight: 700;
     }
@@ -343,12 +343,12 @@
     .layout {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(310px, 0.85fr);
-      gap: 18px;
-      margin-top: 18px;
+      gap: 14px;
+      margin-top: 14px;
     }
 
     .card {
-      padding: 24px;
+      padding: 20px;
     }
 
     .card h2,
@@ -368,8 +368,8 @@
     }
 
     .route-preview {
-      margin-top: 18px;
-      padding: 18px;
+      margin-top: 14px;
+      padding: 16px;
       border-radius: 22px;
       border: 1px dashed rgba(118,191,255,0.34);
       background:
@@ -378,7 +378,7 @@
       color: #dffcf1;
       white-space: pre-wrap;
       font-family: Consolas, monospace;
-      font-size: 0.92rem;
+      font-size: 0.86rem;
       line-height: 1.7;
     }
 
@@ -388,7 +388,7 @@
     }
 
     .step {
-      padding: 16px;
+      padding: 14px;
       border-radius: 20px;
       background: rgba(7, 19, 26, 0.92);
       border: 1px solid rgba(116,255,205,0.12);
@@ -404,8 +404,8 @@
     }
 
     .funding {
-      margin-top: 18px;
-      padding: 22px;
+      margin-top: 16px;
+      padding: 18px;
       background:
         linear-gradient(135deg, rgba(255,140,105,0.15), rgba(118,191,255,0.08)),
         linear-gradient(180deg, rgba(8,24,34,0.84), rgba(5,17,24,0.96));
@@ -432,10 +432,10 @@
     }
 
     footer {
-      margin-top: 18px;
+      margin-top: 14px;
       text-align: center;
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
@@ -452,7 +452,7 @@
       }
 
       .sticker-grid {
-        min-height: 360px;
+        min-height: 320px;
       }
     }
 
@@ -482,7 +482,7 @@
 
       .sticker-grid {
         grid-template-columns: 1fr;
-        min-height: 520px;
+        min-height: 320px;
       }
 
     }
