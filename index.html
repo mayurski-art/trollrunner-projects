@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -116,7 +116,7 @@
     .hero {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 18px;
+      gap: 12px;
       margin-top: 14px;
       align-items: stretch;
     }
@@ -126,13 +126,13 @@
     .card,
     .funding {
       border: 1px solid var(--line);
-      border-radius: 24px;
+      border-radius: 20px;
       background: linear-gradient(180deg, rgba(8,24,34,0.84), rgba(5,17,24,0.96));
       box-shadow: 0 24px 44px rgba(0,0,0,0.22);
     }
 
     .headline {
-      padding: 20px;
+      padding: 16px;
       position: relative;
       overflow: hidden;
       isolation: isolate;
@@ -152,168 +152,112 @@
     .headline::after {
       content: "";
       position: absolute;
-      inset: 14px;
-      border-radius: 18px;
+      inset: 10px;
+      border-radius: 14px;
       border: 1px solid rgba(118,191,255,0.09);
       pointer-events: none;
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(140px, 200px) minmax(0, 1fr) minmax(140px, 200px);
+      gap: 18px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy {
+      min-width: 0;
+      text-align: center;
+      max-width: 420px;
+      margin: 0 auto;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
+      gap: 6px;
+      padding: 6px 8px;
       border-radius: 999px;
       background: rgba(116,255,205,0.08);
       border: 1px solid rgba(116,255,205,0.18);
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
     h1 {
-      margin: 14px 0 0;
-      font-size: clamp(2.4rem, 7vw, 4.6rem);
+      margin: 10px 0 0;
+      font-size: clamp(2rem, 6vw, 3.8rem);
       line-height: 0.92;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
     .subtitle {
-      margin: 12px 0 0;
-      max-width: 50ch;
+      margin: 10px auto 0;
+      max-width: 48ch;
+      text-align: center;
       color: var(--muted);
-      line-height: 1.65;
-      font-size: 0.9rem;
+      line-height: 1.55;
+      font-size: 0.82rem;
     }
 
     .stats-shell {
-      padding: 14px;
+      padding: 12px;
       display: grid;
-      gap: 10px;
+      gap: 8px;
       align-content: start;
     }
 
-    .sticker-stage {
-      position: relative;
-      min-height: 100%;
-      padding: 18px;
-      overflow: hidden;
-    }
-
-    .sticker-stage::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(118,191,255,0.08), transparent 45%),
-        radial-gradient(circle at 20% 22%, rgba(116,255,205,0.12), transparent 20%),
-        repeating-linear-gradient(
-          90deg,
-          transparent 0,
-          transparent 29px,
-          rgba(116,255,205,0.04) 29px,
-          rgba(116,255,205,0.04) 30px
-        );
-      pointer-events: none;
-    }
-
-    .sticker-grid {
+    .hero-media {
       position: relative;
       z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-      margin-top: 0;
-      min-height: 0;
-      justify-items: center;
-    }
-
-    .sticker-card {
-      position: relative;
-      border-radius: 24px;
-      border: 1px solid rgba(116,255,205,0.14);
-      background: rgba(7, 19, 26, 0.8);
-      overflow: hidden;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
-    }
-
-    .sticker-card.tall {
-      min-height: 100%;
-    }
-
-    .sticker-card img {
       width: 100%;
-      height: 100%;
+      max-width: 180px;
+      margin: 0 auto;
+    }
+
+    .hero-media.left,
+    .hero-media.right {
+      max-width: 180px;
+      transform: none;
+    }
+
+    .hero-media.left img,
+    .hero-media.right img {
+      object-fit: contain;
+      aspect-ratio: auto;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: auto;
       object-fit: cover;
       display: block;
       filter: saturate(1.05) contrast(1.04);
-    }
-
-    .sticker-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, transparent 20%, rgba(4,12,17,0.28) 100%),
-        repeating-linear-gradient(
-          180deg,
-          rgba(255,255,255,0.03) 0,
-          rgba(255,255,255,0.03) 1px,
-          transparent 1px,
-          transparent 4px
-        );
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    .sticker-card.glow::after {
-      content: "";
-      position: absolute;
-      inset: auto 12px 12px 12px;
-      height: 48px;
-      border-radius: 16px;
-      background: linear-gradient(90deg, rgba(118,191,255,0.18), rgba(116,255,205,0.18));
-      filter: blur(16px);
-      pointer-events: none;
-    }
-
-    .sticker-card.hero-art {
-      width: min(100%, 620px);
-      min-height: 0;
       aspect-ratio: 23 / 16;
-      margin: 0 auto;
-      border-radius: 20px;
+      border-radius: 14px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.22);
     }
 
-    .orbital-ring {
+    .hero-media::after {
+      content: "";
       position: absolute;
-      z-index: 0;
+      inset: auto 14px -8px 14px;
+      height: 28px;
       border-radius: 999px;
-      border: 1px solid rgba(118,191,255,0.16);
+      background: linear-gradient(90deg, rgba(118,191,255,0.18), rgba(116,255,205,0.18));
+      filter: blur(18px);
       pointer-events: none;
-    }
-
-    .orbital-ring.one {
-      top: 32px;
-      left: 28px;
-      width: 120px;
-      height: 120px;
-    }
-
-    .orbital-ring.two {
-      right: 30px;
-      bottom: 34px;
-      width: 170px;
-      height: 170px;
-      border-style: dashed;
     }
 
     .stats-title {
-      margin: 2px 0 4px;
-      font-size: 0.74rem;
-      letter-spacing: 0.18em;
+      margin: 0 0 2px;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
     }
@@ -321,26 +265,26 @@
     .stats {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      gap: 8px;
     }
 
     .stat {
-      padding: 12px;
-      border-radius: 16px;
+      padding: 10px;
+      border-radius: 12px;
       background: rgba(7, 19, 26, 0.92);
       border: 1px solid rgba(116,255,205,0.12);
     }
 
     .label {
-      font-size: 0.64rem;
+      font-size: 0.56rem;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
       color: var(--muted);
     }
 
     .value {
-      margin-top: 6px;
-      font-size: clamp(1rem, 2.1vw, 1.55rem);
+      margin-top: 5px;
+      font-size: clamp(0.92rem, 1.8vw, 1.3rem);
       color: var(--accent);
       font-weight: 700;
     }
@@ -455,10 +399,6 @@
       .layout {
         grid-template-columns: 1fr;
       }
-
-      .sticker-grid {
-        min-height: 0;
-      }
     }
 
     @media (max-width: 640px) {
@@ -485,19 +425,33 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .sticker-grid {
+      .hero-main {
         grid-template-columns: 1fr;
-        min-height: 0;
+        gap: 10px;
       }
 
-      .sticker-stage {
-        padding: 14px;
+      .hero-media {
+        max-width: 170px;
+        margin: 4px auto 0;
       }
 
-      .sticker-card.hero-art {
-        width: min(100%, 520px);
+      .hero-media.left,
+      .hero-media.right {
+        max-width: 150px;
+        transform: none;
       }
 
+      .hero-media.left {
+        order: 2;
+      }
+
+      .hero-copy {
+        order: 1;
+      }
+
+      .hero-media.right {
+        order: 3;
+      }
     }
   </style>
 </head>
@@ -515,9 +469,19 @@
 
     <section class="hero">
       <div class="headline">
-        <div class="eyebrow">Project 001</div>
-        <h1>U MAD BRO? <span aria-hidden="true">😏</span></h1>
-        <p class="subtitle">Project 001: A meme-art Strava route where the GPS path spells “U MAD BRO?” across the city grid.</p>
+        <div class="hero-main">
+          <div class="hero-media left" aria-label="Decorative trollface collage">
+            <img src="https://memedepot.com/cdn-cgi/imagedelivery/naCPMwxXX46-hrE49eZovw/73f2264d-2cba-4f75-0626-f4c33c4fad00/public" alt="copy_4194A5C3-B6CB-4E54-8814-083D5DA278CA.gif from Meme Depot" />
+          </div>
+          <div class="hero-copy">
+            <div class="eyebrow">Project 001</div>
+            <h1>U MAD BRO? <span aria-hidden="true">😏</span></h1>
+            <p class="subtitle">Project 001: A meme-art Strava route where the GPS path spells “U MAD BRO?” across the city grid.</p>
+          </div>
+          <div class="hero-media right" aria-label="Decorative trollface collage">
+            <img src="https://memedepot.com/cdn-cgi/imagedelivery/naCPMwxXX46-hrE49eZovw/73f2264d-2cba-4f75-0626-f4c33c4fad00/public" alt="copy_4194A5C3-B6CB-4E54-8814-083D5DA278CA.gif from Meme Depot" />
+          </div>
+        </div>
       </div>
 
       <div class="stats-shell" aria-label="Route stats dashboard">
@@ -541,19 +505,6 @@
           </article>
         </div>
       </div>
-    </section>
-
-    <section class="hero">
-      <div class="sticker-stage headline" aria-label="Decorative trollface collage">
-        <div class="orbital-ring one"></div>
-        <div class="orbital-ring two"></div>
-        <div class="sticker-grid">
-          <div class="sticker-card hero-art glow">
-            <img src="https://memedepot.com/cdn-cgi/imagedelivery/naCPMwxXX46-hrE49eZovw/eca91bb6-c109-4041-ed0f-9c2961ebf600/public" alt="copy_6A68F612-573F-474E-BFB4-61D584B32322.gif from Meme Depot" />
-          </div>
-        </div>
-      </div>
-
     </section>
 
     <section class="layout">
