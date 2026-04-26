@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.5" />
   <title>Trollrunner Projects | U MAD BRO?</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
   <style>
     :root {
       --bg: #07141d;
@@ -264,7 +270,7 @@
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 8px;
     }
 
@@ -287,6 +293,25 @@
       font-size: clamp(0.92rem, 1.8vw, 1.3rem);
       color: var(--accent);
       font-weight: 700;
+    }
+
+    .status-joke {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .status-fake {
+      color: var(--danger);
+      text-decoration: line-through;
+      text-decoration-color: #ff4d4d;
+      text-decoration-thickness: 2px;
+      text-decoration-skip-ink: none;
+    }
+
+    .status-real {
+      color: var(--accent);
     }
 
     .layout {
@@ -398,6 +423,7 @@
     }
 
     .map-shot {
+      position: relative;
       overflow: hidden;
       border-radius: 22px;
       border: 1px solid rgba(118,191,255,0.18);
@@ -405,10 +431,91 @@
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
     }
 
-    .map-shot img {
+    .map-shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .map-canvas {
       display: block;
       width: 100%;
-      height: auto;
+      min-height: 360px;
+      height: 420px;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(118,191,255,0.18), transparent 24%),
+        linear-gradient(180deg, rgba(8, 27, 38, 0.96), rgba(4, 14, 20, 0.98));
+    }
+
+    .map-shot .leaflet-control-attribution {
+      background: rgba(7, 19, 26, 0.78);
+      color: rgba(236,255,248,0.76);
+      border-radius: 10px 0 0 0;
+      padding: 4px 7px;
+    }
+
+    .map-shot .leaflet-control-attribution a {
+      color: var(--accent-2);
+    }
+
+    .map-shot .leaflet-bar {
+      border: 1px solid rgba(118,191,255,0.22);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+    }
+
+    .map-shot .leaflet-bar a {
+      background: rgba(7, 19, 26, 0.96);
+      color: var(--text);
+      border-bottom-color: rgba(118,191,255,0.2);
+    }
+
+    .map-shot .leaflet-bar a:hover {
+      background: rgba(12, 31, 42, 0.98);
+      color: var(--accent);
+    }
+
+    .map-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(7, 19, 26, 0.84);
+      border: 1px solid rgba(118,191,255,0.22);
+      color: var(--text);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.22);
+    }
+
+    .map-badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(68,222,166,0.7);
+    }
+
+    .map-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
     }
 
     .map-meta {
@@ -512,6 +619,11 @@
       .hero-media.right {
         order: 3;
       }
+
+      .map-canvas {
+        height: 340px;
+        min-height: 340px;
+      }
     }
   </style>
 </head>
@@ -549,19 +661,15 @@
         <div class="stats">
           <article class="stat">
             <div class="label">Distance</div>
-            <div class="value">5.07 mi</div>
+            <div class="value">5.07 mi / 8.16 km</div>
           </article>
           <article class="stat">
             <div class="label">Elevation</div>
             <div class="value">528 ft</div>
           </article>
           <article class="stat">
-            <div class="label">Track points</div>
-            <div class="value">157 pts</div>
-          </article>
-          <article class="stat">
             <div class="label">Status</div>
-            <div class="value">Letter U mapped</div>
+            <div class="value status-joke"><span class="status-fake">Running</span><span class="status-real">Trolling</span></div>
           </article>
         </div>
       </div>
@@ -582,7 +690,8 @@
 [SHAPE]   vertical stem -> base sweep -> return stem
 [BOUNDS]  1.86 mi × 1.63 mi
 [VERT]    -1 to 455 ft
-[FILES]   157 total route points ready for the project board</div>
+[SITES]   Nearby route landmarks and sticker spots will be filled in once the real Project 001 drop locations are live.
+[STICKERS]  Project 001 "U MAD BRO?" sticker sightings will appear on the main sticker map after those placements happen.</div>
       </article>
 
       <aside class='side-stack'>
@@ -592,7 +701,8 @@
             The first letter now has real map data behind it. This imported segment covers a compact city-grid footprint, preserves the rounded bottom of the “U,” and gives the project page an actual route asset instead of placeholder theory.
           </p>
           <div class='map-shot'>
-            <img src='Project%20001%20U%20MAD%20BRO/U-MapMyRoute-preview.svg' alt='Stylized map preview of the U MapMyRoute route segment for Project 001'>
+            <div class='map-badge'>Street Map View</div>
+            <div id='u-mapmyroute-live' class='map-canvas' aria-label='Real street map showing the U MapMyRoute line'></div>
           </div>
           <div class='map-meta'>
             <div class='map-meta-card'>
@@ -601,7 +711,7 @@
             </div>
             <div class='map-meta-card'>
               <span class='map-meta-label'>Distance</span>
-              <div class='map-meta-value'>5.07 mi</div>
+              <div class='map-meta-value'>5.07 mi / 8.16 km</div>
             </div>
             <div class='map-meta-card'>
               <span class='map-meta-label'>Elevation Band</span>
@@ -633,6 +743,102 @@
       Trollrunner Projects · Art Routes for the internet generation.
     </footer>
   </div>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    async function initUMapMyRoute() {
+      const mapEl = document.getElementById('u-mapmyroute-live');
+      if (!mapEl || typeof L === 'undefined') return;
+
+      const showFallback = (message) => {
+        mapEl.innerHTML = "<div class='map-fallback'>" + message + "</div>";
+      };
+
+      try {
+        const routeFile = encodeURI('Project 001 U MAD BRO/U-MapMyRoute.gpx');
+        const response = await fetch(routeFile);
+        if (!response.ok) {
+          throw new Error('Route file could not be loaded.');
+        }
+
+        const gpxText = await response.text();
+        const xml = new DOMParser().parseFromString(gpxText, 'application/xml');
+        const pointNodes = Array.from(xml.getElementsByTagName('trkpt'));
+        const points = pointNodes
+          .map((node) => {
+            const lat = Number.parseFloat(node.getAttribute('lat'));
+            const lon = Number.parseFloat(node.getAttribute('lon'));
+            if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+            return [lat, lon];
+          })
+          .filter(Boolean);
+
+        if (points.length < 2) {
+          throw new Error('Route geometry is incomplete.');
+        }
+
+        const map = L.map(mapEl, {
+          zoomControl: true,
+          scrollWheelZoom: false,
+          attributionControl: true
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        const routeGlow = L.polyline(points, {
+          color: 'rgba(118, 191, 255, 0.35)',
+          weight: 16,
+          opacity: 0.9,
+          lineCap: 'round',
+          lineJoin: 'round'
+        }).addTo(map);
+
+        const routeLine = L.polyline(points, {
+          color: '#44dea6',
+          weight: 7,
+          opacity: 0.98,
+          lineCap: 'round',
+          lineJoin: 'round'
+        }).addTo(map);
+
+        const start = points[0];
+        const finish = points[points.length - 1];
+
+        L.circleMarker(start, {
+          radius: 7,
+          color: '#d7fff1',
+          weight: 2,
+          fillColor: '#44dea6',
+          fillOpacity: 1
+        }).bindTooltip('Start', { direction: 'top' }).addTo(map);
+
+        L.circleMarker(finish, {
+          radius: 7,
+          color: '#fff0eb',
+          weight: 2,
+          fillColor: '#ff8c69',
+          fillOpacity: 1
+        }).bindTooltip('Finish', { direction: 'top' }).addTo(map);
+
+        const bounds = routeLine.getBounds();
+        map.fitBounds(bounds, { padding: [26, 26] });
+
+        const syncSize = () => map.invalidateSize();
+        window.addEventListener('load', syncSize, { once: true });
+        window.addEventListener('resize', syncSize);
+      } catch (error) {
+        showFallback('Street map preview unavailable right now, but the U route data is still loaded below.');
+      }
+    }
+
+    initUMapMyRoute();
+  </script>
 </body>
 </html>
 
