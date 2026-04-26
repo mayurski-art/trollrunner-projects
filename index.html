@@ -380,6 +380,66 @@
       box-shadow: 0 16px 30px rgba(116,255,205,0.24);
     }
 
+    .side-stack {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .map-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .map-copy {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.94rem;
+    }
+
+    .map-shot {
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(118,191,255,0.18);
+      background: rgba(4, 14, 20, 0.94);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .map-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .map-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .map-meta-card {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(7, 19, 26, 0.92);
+      border: 1px solid rgba(116,255,205,0.12);
+    }
+
+    .map-meta-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 0.64rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .map-meta-value {
+      color: var(--text);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
     footer {
       margin-top: 14px;
       text-align: center;
@@ -476,7 +536,7 @@
           <div class="hero-copy">
             <div class="eyebrow">Project 001</div>
             <h1>U MAD BRO? <span aria-hidden="true">😏</span></h1>
-            <p class="subtitle">Project 001: A meme-art Strava route where the GPS path spells “U MAD BRO?” across the city grid.</p>
+            <p class="subtitle">Project 001 is shaping into a meme-art Strava route that spells “U MAD BRO?” across the city grid. The new MapMyRoute import below locks in the opening “U” with real GPX geometry.</p>
           </div>
           <div class="hero-media right" aria-label="Decorative trollface collage">
             <img src="https://memedepot.com/cdn-cgi/imagedelivery/naCPMwxXX46-hrE49eZovw/73f2264d-2cba-4f75-0626-f4c33c4fad00/public" alt="copy_4194A5C3-B6CB-4E54-8814-083D5DA278CA.gif from Meme Depot" />
@@ -485,62 +545,86 @@
       </div>
 
       <div class="stats-shell" aria-label="Route stats dashboard">
-        <div class="stats-title">Route stats dashboard</div>
+        <div class="stats-title">U-route dashboard</div>
         <div class="stats">
           <article class="stat">
             <div class="label">Distance</div>
-            <div class="value">9.7 mi</div>
+            <div class="value">5.07 mi</div>
           </article>
           <article class="stat">
-            <div class="label">Elevation</div>
-            <div class="value">420 ft</div>
+            <div class="label">Climb</div>
+            <div class="value">528 ft</div>
           </article>
           <article class="stat">
-            <div class="label">Letters</div>
-            <div class="value">9 + ?</div>
+            <div class="label">Track points</div>
+            <div class="value">157 pts</div>
           </article>
           <article class="stat">
             <div class="label">Status</div>
-            <div class="value">Drafting</div>
+            <div class="value">Letter U mapped</div>
           </article>
         </div>
       </div>
     </section>
 
     <section class="layout">
-      <article class="card">
+      <article class='card'>
         <h2>Route Concept Console</h2>
         <p>
-          This route is a wearable piece of street typography. The run starts with a giant “U”, bends through neighborhood blocks to carve “MAD”, and closes with “BRO?” plus a dramatic question mark tail.
+          Your new MapMyRoute export turns Project 001 from a visual idea into a real plotted segment. This GPX captures the opening “U” as a clean southbound drop, a long eastbound base, and a final rise back north so the glyph reads clearly on replay.
         </p>
         <p>
-          Style direction: inspired by the trollface meme spirit (playful, chaotic, self-aware), but designed with clean plotting logic so each character is readable on Strava map replay.
+          The broader joke still stays intact: build a city-scale “U MAD BRO?” route in a way that feels chaotic and funny, while keeping the geometry crisp enough to work as a Strava flex, route poster, and downloadable asset pack.
         </p>
 
-        <div class="route-preview" aria-label="ASCII route plan">[U] ────── turn-by-turn arcs
-[MAD] ──── orthogonal block lettering
-[BRO?] ─ rounded corners + punctuation sweep
-
-ETA split:
-  U      2.1 mi
-  MAD    3.4 mi
-  BRO?   4.2 mi</div>
+        <div class='route-preview' aria-label='Route planning console'>[IMPORT]  U-MapMyRoute.gpx + U-MapMyRoute.kml
+[STATUS]  Letter U fully plotted from live track data
+[SHAPE]   vertical stem -> base sweep -> return stem
+[BOUNDS]  1.86 mi × 1.63 mi
+[VERT]    -1 to 455 ft
+[FILES]   157 total route points ready for the project board</div>
       </article>
 
-      <aside class="card">
-        <h2>Build Timeline</h2>
-        <div class="timeline">
-          <div class="step"><strong>Phase 1</strong><br/>Scout roads and legal pedestrian paths for each glyph.</div>
-          <div class="step"><strong>Phase 2</strong><br/>Plot GPX geometry and validate readability on map zoom levels.</div>
-          <div class="step"><strong>Phase 3</strong><br/>Run the full route, publish Strava activity, and share dashboard recap.</div>
-        </div>
-
-        <section class="funding" aria-label="Funding description">
-          <h2>Fund this Project</h2>
-          <p>
-            Funding supports route scouting, hydration, safety gear, and sticker drops for supporters. Full treasury details and contribution flow are hosted on the finance portal.
+      <aside class='side-stack'>
+        <section class='card map-panel' aria-label='U MapMyRoute details'>
+          <h2>U-MapMyRoute</h2>
+          <p class='map-copy'>
+            The first letter now has real map data behind it. This imported segment covers a compact city-grid footprint, preserves the rounded bottom of the “U,” and gives the project page an actual route asset instead of placeholder theory.
           </p>
-          <a class="cta" href="https://finance.trollrunner.net" target="_blank" rel="noopener noreferrer">Go to Finance Dashboard →</a>
+          <div class='map-shot'>
+            <img src='Project%20001%20U%20MAD%20BRO/U-MapMyRoute-preview.svg' alt='Stylized map preview of the U MapMyRoute route segment for Project 001'>
+          </div>
+          <div class='map-meta'>
+            <div class='map-meta-card'>
+              <span class='map-meta-label'>Footprint</span>
+              <div class='map-meta-value'>1.86 mi × 1.63 mi</div>
+            </div>
+            <div class='map-meta-card'>
+              <span class='map-meta-label'>Distance</span>
+              <div class='map-meta-value'>5.07 mi</div>
+            </div>
+            <div class='map-meta-card'>
+              <span class='map-meta-label'>Elevation Band</span>
+              <div class='map-meta-value'>-1 to 455 ft</div>
+            </div>
+            <div class='map-meta-card'>
+              <span class='map-meta-label'>Track Points</span>
+              <div class='map-meta-value'>157</div>
+            </div>
+            <div class='map-meta-card'>
+              <span class='map-meta-label'>Start Pin</span>
+              <div class='map-meta-value'>34.119663, -117.660935</div>
+            </div>
+            <div class='map-meta-card'>
+              <span class='map-meta-label'>Finish Pin</span>
+              <div class='map-meta-value'>34.117908, -117.629101</div>
+            </div>
+          </div>
+        </section>
+
+        <section class='funding' aria-label='Project funding'>
+          <h2>Fund this Project</h2>
+          <a class='cta' href='https://finance.trollrunner.net' target='_blank' rel='noopener noreferrer'>Go to Finance Dashboard →</a>
         </section>
       </aside>
     </section>
@@ -551,3 +635,5 @@ ETA split:
   </div>
 </body>
 </html>
+
+
