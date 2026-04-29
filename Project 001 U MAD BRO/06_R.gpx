@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Codex" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>R</name>
+    <desc>Concept control-point route for the R letter in U MAD BRO?</desc>
+    <time>2026-04-29T12:29:02-07:00</time>
+  </metadata>
+  <trk>
+    <name>R</name>
+    <desc>Concept control-point route for the R letter in U MAD BRO?</desc>
+    <trkseg>
+      <trkpt lat="34.1320" lon="-117.0800"><ele>0</ele></trkpt>
+      <trkpt lat="34.0900" lon="-117.0800"><ele>0</ele></trkpt>
+      <trkpt lat="34.1200" lon="-117.0450"><ele>0</ele></trkpt>
+      <trkpt lat="34.1050" lon="-117.0300"><ele>0</ele></trkpt>
+      <trkpt lat="34.0850" lon="-117.0500"><ele>0</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>

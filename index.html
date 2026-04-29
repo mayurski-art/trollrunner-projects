@@ -547,6 +547,151 @@
       word-break: break-word;
     }
 
+    .master-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(118,191,255,0.2);
+      background: rgba(118,191,255,0.08);
+      color: var(--muted);
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .sequence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .sequence-card,
+    .asset-link {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(7, 19, 26, 0.92);
+      border: 1px solid rgba(116,255,205,0.12);
+    }
+
+    .sequence-card strong,
+    .asset-link strong {
+      display: block;
+      color: var(--text);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .sequence-card span,
+    .asset-link span,
+    .sequence-card p,
+    .asset-link p,
+    .asset-note {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.86rem;
+    }
+
+    .sequence-card p,
+    .asset-link p {
+      margin-top: 10px;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 0.64rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .status-chip.live {
+      color: #07141d;
+      background: linear-gradient(135deg, var(--accent), #b3ffe6);
+      border-color: transparent;
+    }
+
+    .status-chip.staged {
+      color: var(--accent-2);
+      background: rgba(118,191,255,0.1);
+      border-color: rgba(118,191,255,0.2);
+    }
+
+    .status-chip.planned {
+      color: #ffd9c7;
+      background: rgba(255,140,105,0.1);
+      border-color: rgba(255,140,105,0.22);
+    }
+
+    .asset-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .asset-link {
+      display: block;
+      text-decoration: none;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .asset-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      background: rgba(10, 27, 36, 0.96);
+    }
+
+    .asset-link em {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--accent);
+      font-style: normal;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .asset-note {
+      margin-top: 14px;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .detail-item {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(7, 19, 26, 0.92);
+      border: 1px solid rgba(116,255,205,0.12);
+    }
+
+    .detail-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent-2);
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
     footer {
       margin-top: 14px;
       text-align: center;
@@ -563,7 +708,8 @@
 
     @media (max-width: 960px) {
       .hero,
-      .layout {
+      .layout,
+      .master-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -648,7 +794,7 @@
           <div class="hero-copy">
             <div class="eyebrow">Project 001</div>
             <h1>U MAD BRO? <span aria-hidden="true">😏</span></h1>
-            <p class="subtitle">Project 001 is shaping into a meme-art Strava route that spells “U MAD BRO?” across the city grid. The new MapMyRoute import below locks in the opening “U” with real GPX geometry.</p>
+            <p class="subtitle">Project 001 is the opening move in a full 8-letter Inland Empire GPS-art route package. The current U import is live, and the master draft now maps the whole “U MAD BRO?” phrase west-to-east at roughly 80 miles with connectors.</p>
           </div>
           <div class="hero-media right" aria-label="Decorative trollface collage">
             <img src="https://memedepot.com/cdn-cgi/imagedelivery/naCPMwxXX46-hrE49eZovw/73f2264d-2cba-4f75-0626-f4c33c4fad00/public" alt="copy_4194A5C3-B6CB-4E54-8814-083D5DA278CA.gif from Meme Depot" />
@@ -660,12 +806,12 @@
         <div class="stats-title">U-route dashboard</div>
         <div class="stats">
           <article class="stat">
-            <div class="label">Distance</div>
-            <div class="value">5.07 mi / 8.16 km</div>
+            <div class="label">Full project</div>
+            <div class="value">~80 mi total</div>
           </article>
           <article class="stat">
-            <div class="label">Elevation</div>
-            <div class="value">528 ft</div>
+            <div class="label">Letters</div>
+            <div class="value">73.2 mi</div>
           </article>
           <article class="stat">
             <div class="label">Status</div>
@@ -679,19 +825,19 @@
       <article class='card'>
         <h2>Route Concept Console</h2>
         <p>
-          Your new MapMyRoute export turns Project 001 from a visual idea into a real plotted segment. This GPX captures the opening “U” as a clean southbound drop, a long eastbound base, and a final rise back north so the glyph reads clearly on replay.
+          The full master draft now defines a first-pass coordinate framework for all eight characters as one GPS-art project: U, M, A, D, B, R, O, and the final question mark. These are control vertices for route building, designed to be imported as separate GPX files or stitched into a full horizontal meme ultra.
         </p>
         <p>
-          The broader joke still stays intact: build a city-scale “U MAD BRO?” route in a way that feels chaotic and funny, while keeping the geometry crisp enough to work as a Strava flex, route poster, and downloadable asset pack.
+          The joke stays intact, but the framework is now concrete: 73.2 letter-miles, about 6.9 connector-miles, and a buildable first-pass package called <strong>U MAD BRO? — Inland Empire 80</strong>.
         </p>
 
-        <div class='route-preview' aria-label='Route planning console'>[IMPORT]  U-MapMyRoute.gpx + U-MapMyRoute.kml
-[STATUS]  Letter U fully plotted from live track data
-[SHAPE]   vertical stem -> base sweep -> return stem
-[BOUNDS]  1.86 mi × 1.63 mi
-[VERT]    -1 to 455 ft
-[SITES]   Nearby route landmarks and sticker spots will be filled in once the real Project 001 drop locations are live.
-[STICKERS]  Project 001 "U MAD BRO?" sticker sightings will appear on the main sticker map after those placements happen.</div>
+        <div class='route-preview' aria-label='Route planning console'>[MASTER]  Upland -> Rancho -> Fontana -> Rialto -> Redlands -> Yucaipa -> Beaumont
+[ORDER]   U / M / A / D / B / R / O / ?
+[MILES]   U 8.6 | M 11.8 | A 8.4 | D 9.2 | B 10.9 | R 9.1 | O 7.8 | ? 7.4
+[CONNECT] U-M 1.2 | M-A 0.8 | A-D 1.1 | D-B 0.9 | B-R 1.0 | R-O 0.8 | O-? 1.1
+[FILES]   01_U.gpx ... 08_question.gpx + 09_connectors_optional.gpx + UMADBRO_MASTER.gpx
+[DENSIFY] 40 starter vertices -> ~440 final GPS points for Strava-ready readability
+[STATUS]  Buildable first-pass GPX framework</div>
       </article>
 
       <aside class='side-stack'>
@@ -739,8 +885,148 @@
       </aside>
     </section>
 
+    <section class="master-grid" aria-label="UMADBRO master plan and asset pack">
+      <article class="card">
+        <div class="section-kicker">Master plan route system</div>
+        <h2>UMADBRO Sequence</h2>
+        <p>
+          This repo is now the real home for <code>projects.trollrunner.net</code>, and your concept package gives the sequence real structure. The current draft lays the phrase west-to-east from Upland to Beaumont, with each character built as its own route and optional light connectors between them.
+        </p>
+
+        <div class="sequence-grid" aria-label="UMADBRO letter progression">
+          <article class="sequence-card">
+            <strong>U</strong>
+            <span>Upland · 8.6 mi</span>
+            <div class="status-chip live">Live build</div>
+            <p>Trace 1→2→3→4→5 with the opening route already backed by real GPX geometry and street-map preview.</p>
+          </article>
+          <article class="sequence-card">
+            <strong>M</strong>
+            <span>Rancho · 11.8 mi</span>
+            <div class="status-chip staged">Staged next</div>
+            <p>Trace 6→7→8→9→10 with an exaggerated center valley so the letter reads cleanly on route replay.</p>
+          </article>
+          <article class="sequence-card">
+            <strong>A</strong>
+            <span>Fontana · 8.4 mi</span>
+            <div class="status-chip staged">Staged next</div>
+            <p>Main trace 11→12→13 with crossbar 14→15, keeping the triangular form legible at city scale.</p>
+          </article>
+          <article class="sequence-card">
+            <strong>D</strong>
+            <span>Rialto · 9.2 mi</span>
+            <div class="status-chip planned">Planned</div>
+            <p>Trace 16→17→18→19→20→16 as the central hinge of the phrase, closing back into its own frame.</p>
+          </article>
+          <article class="sequence-card">
+            <strong>B</strong>
+            <span>Redlands · 10.9 mi</span>
+            <div class="status-chip planned">Planned</div>
+            <p>Trace 21→22→23→24→25 with the upper loop intentionally exaggerated so the B does not collapse visually.</p>
+          </article>
+          <article class="sequence-card">
+            <strong>R</strong>
+            <span>Yucaipa · 9.1 mi</span>
+            <div class="status-chip planned">Planned</div>
+            <p>Trace 26→27→28→29→30, with the diagonal leg called out as one of the geometry features worth overdriving.</p>
+          </article>
+          <article class="sequence-card">
+            <strong>O</strong>
+            <span>Beaumont side · 7.8 mi</span>
+            <div class="status-chip planned">Planned</div>
+            <p>Loop 31→32→33→34→35→31 as a self-contained oval before the final punctuation hook gets attached.</p>
+          </article>
+          <article class="sequence-card">
+            <strong>?</strong>
+            <span>Final punctuation · 7.4 mi</span>
+            <div class="status-chip planned">Planned</div>
+            <p>Trace 36→37→38→39 with dot 40. The hook should be exaggerated so the question mark reads instantly on Strava.</p>
+          </article>
+        </div>
+      </article>
+
+      <aside class="side-stack">
+        <section class="card">
+          <div class="section-kicker">Project 001 asset pack</div>
+          <h2>Import Structure</h2>
+          <p>
+            The current package should resolve into separate letter files, optional connector routes, and one stitched master GPX for the full phrase.
+          </p>
+          <div class="asset-grid">
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/U-MapMyRoute.gpx">
+              <strong>U-MapMyRoute.gpx</strong>
+              <span>Current live U route for map import, route testing, and replay.</span>
+              <em>Download GPX</em>
+            </a>
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/U-MapMyRoute.kml">
+              <strong>U-MapMyRoute.kml</strong>
+              <span>KML export for alternate mapping tools and quick visual checks.</span>
+              <em>Download KML</em>
+            </a>
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/U-MapMyRoute-preview.svg">
+              <strong>U-MapMyRoute-preview.svg</strong>
+              <span>Lightweight vector preview for layout comps, route cards, and future poster treatments.</span>
+              <em>Open SVG</em>
+            </a>
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/01_U.gpx">
+              <strong>Concept GPX Pack</strong>
+              <span>Generated first-pass letter routes: 01_U through 08_question, plus optional connectors and the stitched master route.</span>
+              <em>Start with 01_U.gpx</em>
+            </a>
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/09_connectors_optional.gpx">
+              <strong>09_connectors_optional.gpx</strong>
+              <span>Straight-line concept connectors between the eight letter routes for full-package planning.</span>
+              <em>Open Connectors</em>
+            </a>
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/UMADBRO_MASTER.gpx">
+              <strong>UMADBRO_MASTER.gpx</strong>
+              <span>Stitched control-point concept route that sequences the whole phrase into one draft GPX.</span>
+              <em>Open Master Route</em>
+            </a>
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/UMADBRO-master-draft.csv">
+              <strong>UMADBRO-master-draft.csv</strong>
+              <span>Starter control vertices for all letters in one machine-friendly route-planning file.</span>
+              <em>Open CSV</em>
+            </a>
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/UMADBRO-master-draft.md">
+              <strong>UMADBRO-master-draft.md</strong>
+              <span>Repo-side concept package with mileage, trace order, connectors, and build notes.</span>
+              <em>Open Draft</em>
+            </a>
+            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/GPX-import-manifest.txt">
+              <strong>GPX-import-manifest.txt</strong>
+              <span>Planned output filenames for separate letters, connectors, and the stitched master route.</span>
+              <em>Open Manifest</em>
+            </a>
+          </div>
+          <p class="asset-note">
+            Generated from the draft in-repo: <code>01_U.gpx</code>, <code>02_M.gpx</code>, <code>03_A.gpx</code>, <code>04_D.gpx</code>, <code>05_B.gpx</code>, <code>06_R.gpx</code>, <code>07_O.gpx</code>, <code>08_question.gpx</code>, <code>09_connectors_optional.gpx</code>, and <code>UMADBRO_MASTER.gpx</code>.
+          </p>
+        </section>
+
+        <section class="card">
+          <div class="section-kicker">Build notes</div>
+          <h2>8-Week Build</h2>
+          <div class="detail-list">
+            <div class="detail-item">
+              <strong>Weekly rollout</strong>
+              Week 1 U, Week 2 M, Week 3 A, Week 4 D, Week 5 B, Week 6 R, Week 7 O, Week 8 question mark.
+            </div>
+            <div class="detail-item">
+              <strong>Geometry polish</strong>
+              Keep overdraw where it matters: M center valley, B upper loop, R diagonal leg, and the question mark hook.
+            </div>
+            <div class="detail-item">
+              <strong>Field verification</strong>
+              Before running, verify access, crossings, sidewalks, trail gates, and elevation spikes, then refine each letter in Strava Route Builder.
+            </div>
+          </div>
+        </section>
+      </aside>
+    </section>
+
     <footer>
-      Trollrunner Projects · Art Routes for the internet generation.
+      Trollrunner Projects · Project 001 lives here now, with the broader UMADBRO build queued behind it.
     </footer>
   </div>
   <script
