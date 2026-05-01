@@ -996,33 +996,40 @@
           'Project 001 U MAD BRO/08_question.gpx'
         ];
 
+        const loadGpxPoints = async (file) => {
+          const response = await fetch(encodeURI(file));
+          if (!response.ok) {
+            return null;
+          }
+
+          const gpxText = await response.text();
+          const xml = new DOMParser().parseFromString(gpxText, 'application/xml');
+          const pointNodes = Array.from(xml.getElementsByTagName('trkpt'));
+          const points = pointNodes
+            .map((node) => {
+              const lat = Number.parseFloat(node.getAttribute('lat'));
+              const lon = Number.parseFloat(node.getAttribute('lon'));
+              if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+              return [lat, lon];
+            })
+            .filter(Boolean);
+
+          if (points.length < 2) return null;
+          return points;
+        };
+
         const letterRoutes = await Promise.all(
-          letterRouteFiles.map(async (file) => {
-            const response = await fetch(encodeURI(file));
-            if (!response.ok) {
-              throw new Error('Route file could not be loaded.');
-            }
-
-            const gpxText = await response.text();
-            const xml = new DOMParser().parseFromString(gpxText, 'application/xml');
-            const pointNodes = Array.from(xml.getElementsByTagName('trkpt'));
-            const points = pointNodes
-              .map((node) => {
-                const lat = Number.parseFloat(node.getAttribute('lat'));
-                const lon = Number.parseFloat(node.getAttribute('lon'));
-                if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
-                return [lat, lon];
-              })
-              .filter(Boolean);
-
-            if (points.length < 2) return null;
-            return points;
-          })
+          letterRouteFiles.map((file) => loadGpxPoints(file))
         );
 
         const routes = letterRoutes.filter(Boolean);
         if (!routes.length) {
-          throw new Error('Route geometry is incomplete.');
+          const fallbackRoute = await loadGpxPoints('Project 001 U MAD BRO/U-MapMyRoute.gpx');
+          if (fallbackRoute) {
+            routes.push(fallbackRoute);
+          } else {
+            throw new Error('Route geometry is incomplete.');
+          }
         }
 
         const map = L.map(mapEl, {
