@@ -985,6 +985,17 @@
       };
 
       try {
+        const map = L.map(mapEl, {
+          zoomControl: true,
+          scrollWheelZoom: false,
+          attributionControl: true
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
         const letterRouteFiles = [
           'Project 001 U MAD BRO/01_U.gpx',
           'Project 001 U MAD BRO/02_M.gpx',
@@ -997,25 +1008,29 @@
         ];
 
         const loadGpxPoints = async (file) => {
-          const response = await fetch(encodeURI(file));
-          if (!response.ok) {
+          try {
+            const response = await fetch(encodeURI(file));
+            if (!response.ok) {
+              return null;
+            }
+
+            const gpxText = await response.text();
+            const xml = new DOMParser().parseFromString(gpxText, 'application/xml');
+            const pointNodes = Array.from(xml.getElementsByTagName('trkpt'));
+            const points = pointNodes
+              .map((node) => {
+                const lat = Number.parseFloat(node.getAttribute('lat'));
+                const lon = Number.parseFloat(node.getAttribute('lon'));
+                if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+                return [lat, lon];
+              })
+              .filter(Boolean);
+
+            if (points.length < 2) return null;
+            return points;
+          } catch (error) {
             return null;
           }
-
-          const gpxText = await response.text();
-          const xml = new DOMParser().parseFromString(gpxText, 'application/xml');
-          const pointNodes = Array.from(xml.getElementsByTagName('trkpt'));
-          const points = pointNodes
-            .map((node) => {
-              const lat = Number.parseFloat(node.getAttribute('lat'));
-              const lon = Number.parseFloat(node.getAttribute('lon'));
-              if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
-              return [lat, lon];
-            })
-            .filter(Boolean);
-
-          if (points.length < 2) return null;
-          return points;
         };
 
         const letterRoutes = await Promise.all(
@@ -1028,20 +1043,10 @@
           if (fallbackRoute) {
             routes.push(fallbackRoute);
           } else {
-            throw new Error('Route geometry is incomplete.');
+            map.setView([34.06, -117.38], 10);
+            return;
           }
         }
-
-        const map = L.map(mapEl, {
-          zoomControl: true,
-          scrollWheelZoom: false,
-          attributionControl: true
-        });
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
 
         const group = L.featureGroup();
         routes.forEach((points) => {
