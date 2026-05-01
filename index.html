@@ -946,64 +946,6 @@
 
       <aside class="side-stack">
         <section class="card">
-          <div class="section-kicker">Project 001 asset pack</div>
-          <h2>Import Structure</h2>
-          <p>
-            The current package should resolve into separate letter files, optional connector routes, and one stitched master GPX for the full phrase.
-          </p>
-          <div class="asset-grid">
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/U-MapMyRoute.gpx">
-              <strong>U-MapMyRoute.gpx</strong>
-              <span>Current live U route for map import, route testing, and replay.</span>
-              <em>Download GPX</em>
-            </a>
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/U-MapMyRoute.kml">
-              <strong>U-MapMyRoute.kml</strong>
-              <span>KML export for alternate mapping tools and quick visual checks.</span>
-              <em>Download KML</em>
-            </a>
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/U-MapMyRoute-preview.svg">
-              <strong>U-MapMyRoute-preview.svg</strong>
-              <span>Lightweight vector preview for layout comps, route cards, and future poster treatments.</span>
-              <em>Open SVG</em>
-            </a>
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/01_U.gpx">
-              <strong>Concept GPX Pack</strong>
-              <span>Generated first-pass letter routes: 01_U through 08_question, plus optional connectors and the stitched master route.</span>
-              <em>Start with 01_U.gpx</em>
-            </a>
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/09_connectors_optional.gpx">
-              <strong>09_connectors_optional.gpx</strong>
-              <span>Straight-line concept connectors between the eight letter routes for full-package planning.</span>
-              <em>Open Connectors</em>
-            </a>
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/UMADBRO_MASTER.gpx">
-              <strong>UMADBRO_MASTER.gpx</strong>
-              <span>Stitched control-point concept route that sequences the whole phrase into one draft GPX.</span>
-              <em>Open Master Route</em>
-            </a>
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/UMADBRO-master-draft.csv">
-              <strong>UMADBRO-master-draft.csv</strong>
-              <span>Starter control vertices for all letters in one machine-friendly route-planning file.</span>
-              <em>Open CSV</em>
-            </a>
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/UMADBRO-master-draft.md">
-              <strong>UMADBRO-master-draft.md</strong>
-              <span>Repo-side concept package with mileage, trace order, connectors, and build notes.</span>
-              <em>Open Draft</em>
-            </a>
-            <a class="asset-link" href="Project%20001%20U%20MAD%20BRO/GPX-import-manifest.txt">
-              <strong>GPX-import-manifest.txt</strong>
-              <span>Planned output filenames for separate letters, connectors, and the stitched master route.</span>
-              <em>Open Manifest</em>
-            </a>
-          </div>
-          <p class="asset-note">
-            Generated from the draft in-repo: <code>01_U.gpx</code>, <code>02_M.gpx</code>, <code>03_A.gpx</code>, <code>04_D.gpx</code>, <code>05_B.gpx</code>, <code>06_R.gpx</code>, <code>07_O.gpx</code>, <code>08_question.gpx</code>, <code>09_connectors_optional.gpx</code>, and <code>UMADBRO_MASTER.gpx</code>.
-          </p>
-        </section>
-
-        <section class="card">
           <div class="section-kicker">Build notes</div>
           <h2>8-Week Build</h2>
           <div class="detail-list">
@@ -1043,26 +985,51 @@
       };
 
       try {
-        const routeFile = encodeURI('Project 001 U MAD BRO/U-MapMyRoute.gpx');
-        const response = await fetch(routeFile);
-        if (!response.ok) {
-          throw new Error('Route file could not be loaded.');
-        }
+        const letterRouteFiles = [
+          'Project 001 U MAD BRO/01_U.gpx',
+          'Project 001 U MAD BRO/02_M.gpx',
+          'Project 001 U MAD BRO/03_A.gpx',
+          'Project 001 U MAD BRO/04_D.gpx',
+          'Project 001 U MAD BRO/05_B.gpx',
+          'Project 001 U MAD BRO/06_R.gpx',
+          'Project 001 U MAD BRO/07_O.gpx',
+          'Project 001 U MAD BRO/08_question.gpx'
+        ];
 
-        const gpxText = await response.text();
-        const xml = new DOMParser().parseFromString(gpxText, 'application/xml');
-        const pointNodes = Array.from(xml.getElementsByTagName('trkpt'));
-        const points = pointNodes
-          .map((node) => {
-            const lat = Number.parseFloat(node.getAttribute('lat'));
-            const lon = Number.parseFloat(node.getAttribute('lon'));
-            if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
-            return [lat, lon];
-          })
-          .filter(Boolean);
+        const loadGpxPoints = async (file) => {
+          const response = await fetch(encodeURI(file));
+          if (!response.ok) {
+            return null;
+          }
 
-        if (points.length < 2) {
-          throw new Error('Route geometry is incomplete.');
+          const gpxText = await response.text();
+          const xml = new DOMParser().parseFromString(gpxText, 'application/xml');
+          const pointNodes = Array.from(xml.getElementsByTagName('trkpt'));
+          const points = pointNodes
+            .map((node) => {
+              const lat = Number.parseFloat(node.getAttribute('lat'));
+              const lon = Number.parseFloat(node.getAttribute('lon'));
+              if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+              return [lat, lon];
+            })
+            .filter(Boolean);
+
+          if (points.length < 2) return null;
+          return points;
+        };
+
+        const letterRoutes = await Promise.all(
+          letterRouteFiles.map((file) => loadGpxPoints(file))
+        );
+
+        const routes = letterRoutes.filter(Boolean);
+        if (!routes.length) {
+          const fallbackRoute = await loadGpxPoints('Project 001 U MAD BRO/U-MapMyRoute.gpx');
+          if (fallbackRoute) {
+            routes.push(fallbackRoute);
+          } else {
+            throw new Error('Route geometry is incomplete.');
+          }
         }
 
         const map = L.map(mapEl, {
@@ -1076,24 +1043,30 @@
           attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        const routeGlow = L.polyline(points, {
-          color: 'rgba(118, 191, 255, 0.35)',
-          weight: 16,
-          opacity: 0.9,
-          lineCap: 'round',
-          lineJoin: 'round'
-        }).addTo(map);
+        const group = L.featureGroup();
+        routes.forEach((points) => {
+          L.polyline(points, {
+            color: 'rgba(118, 191, 255, 0.3)',
+            weight: 13,
+            opacity: 0.85,
+            lineCap: 'round',
+            lineJoin: 'round'
+          }).addTo(group);
 
-        const routeLine = L.polyline(points, {
-          color: '#44dea6',
-          weight: 7,
-          opacity: 0.98,
-          lineCap: 'round',
-          lineJoin: 'round'
-        }).addTo(map);
+          L.polyline(points, {
+            color: '#44dea6',
+            weight: 6,
+            opacity: 0.98,
+            lineCap: 'round',
+            lineJoin: 'round'
+          }).addTo(group);
+        });
+        group.addTo(map);
 
-        const start = points[0];
-        const finish = points[points.length - 1];
+        const firstRoute = routes[0];
+        const lastRoute = routes[routes.length - 1];
+        const start = firstRoute[0];
+        const finish = lastRoute[lastRoute.length - 1];
 
         L.circleMarker(start, {
           radius: 7,
@@ -1111,14 +1084,14 @@
           fillOpacity: 1
         }).bindTooltip('Finish', { direction: 'top' }).addTo(map);
 
-        const bounds = routeLine.getBounds();
+        const bounds = group.getBounds();
         map.fitBounds(bounds, { padding: [26, 26] });
 
         const syncSize = () => map.invalidateSize();
         window.addEventListener('load', syncSize, { once: true });
         window.addEventListener('resize', syncSize);
       } catch (error) {
-        showFallback('Street map preview unavailable right now, but the U route data is still loaded below.');
+        showFallback('Street map preview unavailable right now, but the U MAD BRO? route data is still loaded below.');
       }
     }
 
@@ -1126,4 +1099,3 @@
   </script>
 </body>
 </html>
-
